@@ -66,9 +66,13 @@ namespace BotClient
 			if (message.Text == "Привет!") await botClient.SendTextMessageAsync(chatId: chatId, text: "Здарова!", cancellationToken: cancellationToken);
 
 			if (message.Text == "Картинка") await botClient.SendPhotoAsync(chatId: chatId,
-															photo: "file:///C://Users/Egor/Desktop/Егор/Другое/BotClient/BotClient/pedro.jpg",
+															photo: "https://raw.githubusercontent.com/FilinEgorq/InternetShopBot/main/BotClient/pedro.jpg",
 															parseMode: ParseMode.Html,
-															caption: "<b>мем)</b>",
+															caption: "<b>Мем)</b>",
+															cancellationToken: cancellationToken);
+
+			if (message.Text == "Стикер") await botClient.SendStickerAsync(chatId: chatId,
+															sticker: "https://github.com/TelegramBots/book/raw/master/src/docs/sticker-fred.webp",
 															cancellationToken: cancellationToken);
 		}
 
