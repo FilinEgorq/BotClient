@@ -5,6 +5,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Domain.Models;
 using Newtonsoft.Json;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace BotClient
 {
@@ -75,7 +76,18 @@ namespace BotClient
 															sticker: "https://github.com/TelegramBots/book/raw/master/src/docs/sticker-fred.webp",
 															cancellationToken: cancellationToken);
 
-			if (message.Text == "Видео") await botClient.SendVideoAsync(chatId: chatId, video: "");
+			if (message.Text == "Видео") await botClient.SendVideoAsync(chatId: chatId, video: "https://raw.githubusercontent.com/FilinEgorq/InternetShopBot/main/BotClient/stoilo.mp4");
+
+			var keyboard = new InlineKeyboardMarkup(new InlineKeyboardButton[][]
+													{new [] {
+												 new InlineKeyboardButton("Компьютерные мыши") { CallbackData = "MouseButtonCallback"},
+												 new InlineKeyboardButton("Видеокарты") { CallbackData = "VideocardsButtonCallback"},
+												 new InlineKeyboardButton("Холодильники") { CallbackData = "FridgesButtonCallback"},
+												 new InlineKeyboardButton("Стиральные машины") { CallbackData = "WashMachinesButtonCallback"},
+												 },
+												   });
+
+			if (message.Text == "Каталог") await botClient.SendTextMessageAsync(chatId, "Все категории", replyMarkup: keyboard);
 		}
 
 		static Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
