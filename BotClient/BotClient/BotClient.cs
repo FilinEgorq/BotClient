@@ -13,16 +13,16 @@ namespace BotClient
 		static async Task Main(string[] args)
 		{
 			HttpClient client = new HttpClient();
-			var result = await client.GetAsync("https://localhost:7217/api/Good");
-			string data = await result.Content.ReadAsStringAsync();
-			Good[] goods = JsonConvert.DeserializeObject<Good[]>(data);
+			//var result = await client.GetAsync("https://localhost:7217/api/Good");
+			//string data = await result.Content.ReadAsStringAsync();
+			//Good[] goods = JsonConvert.DeserializeObject<Good[]>(data);
 			var botClient = new TelegramBotClient("6016486340:AAH6mGf5Bh_G_rIUwcEHLS1CTdB1IXtqT7E");
 			using CancellationTokenSource cts = new CancellationTokenSource();
 
-			foreach(Good good in goods)
-			{
-				Console.WriteLine(GoodToString(good));
-			}
+			//foreach(Good good in goods)
+			//{
+			//	Console.WriteLine(GoodToString(good));
+			//}
 
 			Console.WriteLine("\n\n\n");
 
@@ -74,6 +74,8 @@ namespace BotClient
 			if (message.Text == "Стикер") await botClient.SendStickerAsync(chatId: chatId,
 															sticker: "https://github.com/TelegramBots/book/raw/master/src/docs/sticker-fred.webp",
 															cancellationToken: cancellationToken);
+
+			if (message.Text == "Видео") await botClient.SendVideoAsync(chatId: chatId, video: "");
 		}
 
 		static Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
